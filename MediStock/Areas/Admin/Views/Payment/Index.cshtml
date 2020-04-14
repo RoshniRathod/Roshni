@@ -1,0 +1,303 @@
+﻿@model PaymentModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    if (TempData["PaymentActiveMenuItem"].ToString() == "payment-sidebar-id")
+    {
+        <script>
+            $(document).ready(function () {
+                $('.nav-item').removeClass("active")
+                $('#@TempData["PaymentActiveMenuItem"].ToString()').parent().addClass("active");
+            });
+        </script>
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-body">
+            <h4 class="page-title">Payments</h4>
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-primary card-round">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="flaticon-users"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-stats">
+                                    <div class="numbers">
+                                        <p class="card-category">Advertisements</p>
+                                        <h4 class="card-title">1,294</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-info card-round">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="flaticon-interface-6"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-stats">
+                                    <div class="numbers">
+                                        <p class="card-category">Subscribers</p>
+                                        <h4 class="card-title">1303</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-success card-round">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="flaticon-analytics"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-stats">
+                                    <div class="numbers">
+                                        <p class="card-category">Sales</p>
+                                        <h4 class="card-title">$ 1,345</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-secondary card-round">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="flaticon-success"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-stats">
+                                    <div class="numbers">
+                                        <p class="card-category">Order</p>
+                                        <h4 class="card-title">576</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-sm-4 col-lg-2">
+                    <div class="card">
+                        <div class="card-body p-3 text-center">
+                            <div class="text-right text-success">
+                                6%
+                                <i class="fa fa-chevron-up"></i>
+                            </div>
+                            <div class="h1 m-0">43</div>
+                            <div class="text-muted mb-3">New Tickets</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2">
+                    <div class="card">
+                        <div class="card-body p-3 text-center">
+                            <div class="text-right text-danger">
+                                -3%
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div class="h1 m-0">17</div>
+                            <div class="text-muted mb-3">Closed Today</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2">
+                    <div class="card">
+                        <div class="card-body p-3 text-center">
+                            <div class="text-right text-success">
+                                9%
+                                <i class="fa fa-chevron-up"></i>
+                            </div>
+                            <div class="h1 m-0">7</div>
+                            <div class="text-muted mb-3">New Replies</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2">
+                    <div class="card">
+                        <div class="card-body p-3 text-center">
+                            <div class="text-right text-success">
+                                3%
+                                <i class="fa fa-chevron-up"></i>
+                            </div>
+                            <div class="h1 m-0">27.3K</div>
+                            <div class="text-muted mb-3">Followers</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2">
+                    <div class="card">
+                        <div class="card-body p-3 text-center">
+                            <div class="text-right text-danger">
+                                -2%
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div class="h1 m-0">$95</div>
+                            <div class="text-muted mb-3">Daily Earnings</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2">
+                    <div class="card">
+                        <div class="card-body p-3 text-center">
+                            <div class="text-right text-danger">
+                                -1%
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div class="h1 m-0">621</div>
+                            <div class="text-muted mb-3">Products</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="page-title">
+                <button class="btn btn-secondary btn-sm"
+                        type="button"
+                        style="box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;"
+                        onclick="window.location.href='@Url.Action("AddCard", "Payment")'">
+                    Add Card
+                </button>
+            </h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-dark bg-secondary-gradient">
+                        <div class="card-body skew-shadow">
+                            <img src="~/Content/Themes/Admin/assets/img/visa.svg" height="12.5" alt="Visa Logo">
+                            <h2 class="py-4 mb-0">1234 **** **** 5678</h2>
+                            <div class="row">
+                                <div class="col-8 pr-0">
+                                    <h3 class="fw-bold mb-1">Raj Pawar</h3>
+                                    <div class="text-small text-uppercase fw-bold op-8">Card Holder</div>
+                                </div>
+                                <div class="col-4 pl-0 text-right">
+                                    <h3 class="fw-bold mb-1">4/26</h3>
+                                    <div class="text-small text-uppercase fw-bold op-8">Expired</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-danger btn-sm"
+                            type="button"
+                            style="box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;"
+                            onclick="DeletePaymentCard(3)">
+                        Remove
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-dark bg-secondary-gradient">
+                        <div class="card-body bubble-shadow">
+                            <img src="~/Content/Themes/Admin/assets/img/visa.svg" height="12.5" alt="Visa Logo">
+                            <h2 class="py-4 mb-0">1234 **** **** 5678</h2>
+                            <div class="row">
+                                <div class="col-8 pr-0">
+                                    <h3 class="fw-bold mb-1">Urvesh Mishra</h3>
+                                    <div class="text-small text-uppercase fw-bold op-8">Card Holder</div>
+                                </div>
+                                <div class="col-4 pl-0 text-right">
+                                    <h3 class="fw-bold mb-1">4/26</h3>
+                                    <div class="text-small text-uppercase fw-bold op-8">Expired</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-danger btn-sm"
+                            type="button"
+                            style="box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;"
+                            onclick="DeletePaymentCard(3)">
+                        Remove
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-dark bg-secondary-gradient">
+                        <div class="card-body curves-shadow">
+                            <img src="~/Content/Themes/Admin/assets/img/visa.svg" height="12.5" alt="Visa Logo">
+                            <h2 class="py-4 mb-0">1234 **** **** 5678</h2>
+                            <div class="row">
+                                <div class="col-8 pr-0">
+                                    <h3 class="fw-bold mb-1">Rishikesh Sahani</h3>
+                                    <div class="text-small text-uppercase fw-bold op-8">Card Holder</div>
+                                </div>
+                                <div class="col-4 pl-0 text-right">
+                                    <h3 class="fw-bold mb-1">4/26</h3>
+                                    <div class="text-small text-uppercase fw-bold op-8">Expired</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-danger btn-sm"
+                            type="button"
+                            style="box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;"
+                            onclick="DeletePaymentCard(3)">
+                        Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function DeletePaymentCard(cardId) {
+
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            buttons: {
+                cancel: {
+                    visible: true,
+                    text: 'No, cancel!',
+                    className: 'btn btn-danger'
+                },
+                confirm: {
+                    text: 'Yes, delete card!',
+                    className: 'btn btn-success'
+                }
+            }
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal("Poof! Your card has been successfully deleted!", {
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            className: 'btn btn-success'
+                        }
+                    }
+                });
+            } else {
+                swal("Your card is safe!", {
+                    buttons: {
+                        confirm: {
+                            className: 'btn btn-success'
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+</script>
+

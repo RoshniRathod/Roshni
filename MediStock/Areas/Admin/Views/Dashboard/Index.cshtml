@@ -1,0 +1,139 @@
+﻿@{
+    ViewData["Title"] = "AdminMediStock";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{
+    if (TempData["DashboardActiveMenuItem"].ToString() == "dashboard-sidebar-id")
+    {
+        <script>
+            $('.nav-item').removeClass("active")
+            $('#@TempData["DashboardActiveMenuItem"].ToString()').parent().addClass("active");
+        </script>
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-secondary mr-3">
+                                <i class="fa fa-dollar-sign"></i>
+                            </span>
+                            <div>
+                                <h5 class="mb-1"><b><a href="#">132 <small>Sales</small></a></b></h5>
+                                <small class="text-muted">12 waiting payments</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-success mr-3">
+                                <i class="fa fa-shopping-cart"></i>
+                            </span>
+                            <div>
+                                <h5 class="mb-1"><b><a href="#">78 <small>Orders</small></a></b></h5>
+                                <small class="text-muted">32 shipped</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-danger mr-3">
+                                <i class="fa fa-users"></i>
+                            </span>
+                            <div>
+                                <h5 class="mb-1"><b><a href="#">1,352 <small>Members</small></a></b></h5>
+                                <small class="text-muted">163 registered today</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-warning mr-3">
+                                <i class="fa fa-comment-alt"></i>
+                            </span>
+                            <div>
+                                <h5 class="mb-1"><b><a href="#">132 <small>Comments</small></a></b></h5>
+                                <small class="text-muted">16 waiting</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Top Products</div>
+                        </div>
+                        <div class="card-body pb-0">
+                            <div class="d-flex">
+                                <div class="avatar">
+                                    <img src="~/Content/Themes/Admin/assets/img/logoproduct.svg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                                <div class="flex-1 pt-1 ml-2">
+                                    <h6 class="fw-bold mb-1">CSS</h6>
+                                    <small class="text-muted">Cascading Style Sheets</small>
+                                </div>
+                                <div class="d-flex ml-auto align-items-center">
+                                    <h3 class="text-info fw-bold">+$17</h3>
+                                </div>
+                            </div>
+                            <div class="separator-dashed"></div>
+                            <div class="d-flex">
+                                <div class="avatar">
+                                    <img src="~/Content/Themes/Admin/assets/img/logoproduct.svg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                                <div class="flex-1 pt-1 ml-2">
+                                    <h6 class="fw-bold mb-1">J.CO Donuts</h6>
+                                    <small class="text-muted">The Best Donuts</small>
+                                </div>
+                                <div class="d-flex ml-auto align-items-center">
+                                    <h3 class="text-info fw-bold">+$300</h3>
+                                </div>
+                            </div>
+                            <div class="separator-dashed"></div>
+                            <div class="d-flex">
+                                <div class="avatar">
+                                    <img src="~/Content/Themes/Admin/assets/img/logoproduct3.svg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                                <div class="flex-1 pt-1 ml-2">
+                                    <h6 class="fw-bold mb-1">Ready Pro</h6>
+                                    <small class="text-muted">Bootstrap 4 Admin Dashboard</small>
+                                </div>
+                                <div class="d-flex ml-auto align-items-center">
+                                    <h3 class="text-info fw-bold">+$350</h3>
+                                </div>
+                            </div>
+                            <div class="separator-dot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-primary bg-primary-gradient">
+                        <div class="card-body">
+                            <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Active user right now</h4>
+                            <h1 class="mb-4 fw-bold">17</h1>
+                            <h4 class="mt-3 b-b1 pb-2 mb-5 fw-bold">Page view per minutes</h4>
+                            <div id="activeUsersChart"></div>
+                            <h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4>
+                            <ul class="list-unstyled">
+                                <li class="d-flex justify-content-between pb-1 pt-1"><small>/product/readypro/index.html</small> <span>7</span></li>
+                                <li class="d-flex justify-content-between pb-1 pt-1"><small>/product/atlantis/demo.html</small> <span>10</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
