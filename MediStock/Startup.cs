@@ -1,3 +1,4 @@
+using BAL.Services;
 using DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,7 @@ namespace MediStock
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
             // TODO: Register services
-            // services.AddScoped<IMyDependency, MyDependency>();
+             services.AddScoped<IUserService, UserService>();
 
             // Configure context class
             services.AddDbContext<MediStockContext>(options =>
@@ -53,6 +54,8 @@ namespace MediStock
 
             // Add MVC feature
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+
+
             services.AddControllersWithViews();
         }
 

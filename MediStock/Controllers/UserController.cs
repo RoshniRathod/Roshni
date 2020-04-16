@@ -55,17 +55,17 @@ namespace MediStockWeb.Controllers
                 if (userData == null)
                 {
                     TempData["Message"] = "The provided E-mail is already in use. Please provide another E-mail";
-                    return RedirectToAction("SignUp", "Home", new { area = "" });
+                    return RedirectToAction("SignUp", "Authentication", new { area = "" });
                 }
                 else
                 {
                     TempData["Message"] = "Sign Up successfull. Please Sign In";
-                    return RedirectToAction("SignIn", "Home", new { area = "" });
+                    return RedirectToAction("Auth", "Authentication", new { area = "" });
                 }
             }
 
             TempData["Message"] = "Oops some error occured please try again...";
-            return RedirectToAction("SignUp", "Home", new { area = "" });
+            return RedirectToAction("SignUp", "Authentication", new { area = "" });
         }
 
         public ActionResult EditUser(int CustomerID)

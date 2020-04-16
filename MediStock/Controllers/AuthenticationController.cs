@@ -1,4 +1,5 @@
 ﻿using MediStockWeb.Controllers.Base;
+using MediStockWeb.Models;
 using MediStockWeb.Models.Auth;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,15 +11,20 @@ namespace MediStockWeb.Controllers
         {
             return View();
         }
-        
-        [HttpPost]
-        public IActionResult SignUp(AuthenticationModel model)
+
+        public IActionResult SignUp()
         {
             return View();
         }
         
         [HttpPost]
-        public IActionResult SignIn(AuthenticationModel model)
+        public IActionResult SignUp(CustomerModel model)
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult SignIn(CustomerModel model)
         {
             return RedirectToAction(nameof(Auth));
         }

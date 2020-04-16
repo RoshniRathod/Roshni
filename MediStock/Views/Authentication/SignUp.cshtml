@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="module" style="background-image:url(../Content/Themes/Store/assets/images/AuthBg.png)">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <h4 class="font-alt" style="text-shadow: 1px 1px 8px white; color: black;">Register</h4>
+                @using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
+                {
+                    <div class="form-group">
+                        <input class="form-control" id="E-mail" type="text" name="email" placeholder="Email" style="box-shadow: 8px 8px 0px black;" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="First_name" type="text" name="FirstName" placeholder="First Name" style="box-shadow: 8px 8px 0px black;" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="Last_name" type="text" name="LastName" placeholder="Last Name" style="box-shadow: 8px 8px 0px black;" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="phone" type="text" name="Phone" placeholder="Phone" style="box-shadow: 8px 8px 0px black;" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="password" type="password" name="password" placeholder="Password" style="box-shadow: 8px 8px 0px black;" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" id="re-password" type="password" name="re-password" placeholder="Re-enter Password" style="box-shadow: 8px 8px 0px black;" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-round btn-b" style="box-shadow: 5px 5px 10px black;">Register</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<div class="module-small bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="widget" style="text-align:center;">
+                    <h5 class="widget-title font-alt">About MediStock</h5>
+                    <p>We are premium drugs supplying agency</p>
+                    <p>Phone: +91 9978747702</p>
+                    <p>Email: <a href="mailto:er.rajpawar@gmail.com?subject=MediStock Inquiry">er.rajpawar@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
