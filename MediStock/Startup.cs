@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace MediStock
+namespace MediStockWeb
 {
     public class Startup
     {
@@ -46,7 +46,8 @@ namespace MediStock
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
             // TODO: Register services
-             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             // Configure context class
             services.AddDbContext<MediStockContext>(options =>

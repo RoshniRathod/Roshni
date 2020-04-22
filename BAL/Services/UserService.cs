@@ -1,8 +1,10 @@
 using DAL.Data;
 using DAL.Domains;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -70,28 +72,60 @@ namespace BAL.Services
             throw new NotImplementedException();
         }
 
-        public Customer DeleteUser(int id)
+        public Customer DeleteUser(Customer customerEntity)
         {
 
-            var param1 = new SqlParameter();
-            param1.ParameterName = "Id";
-            param1.SqlDbType = SqlDbType.Int;
-            param1.SqlValue = id;
+            context.Entry(customerEntity).State = EntityState.Deleted;
+            context.SaveChanges();
 
-            context.Database.ExecuteSqlCommand("DeleteUser @Id", param1);
-            // Check user is deleted or not
-            var checkUserExistsOrNot = context.Customers.FirstOrDefault(s => s.Id == id);
+            return customerEntity;
+        }
 
-            if (checkUserExistsOrNot != null)
+        public virtual IList<SelectListItem> PrepareTitleList()
+        {
+            var data = context.Customers.Select(x => new SelectListItem()
             {
-                return customer;
-            }
-            else
-            {
-                return null;
-            }
+                Text = x.FirstName,
+                Value = x.FirstName
+            }).ToList();
 
-            throw new NotImplementedException();
+            // Add default value. Set selected = true so it will load all employee list.
+            data.Add(new SelectListItem() { Text = "Select One", Value = "", Selected = true });
+            return data;
+        }
+
+        public IEnumerable<Customer> GetUsersByName(string searchString)
+        {
+            List<Customer> list = context.Customers.Where(t => t.FirstName.Contains(searchString) || t.Email.Contains(searchString) || t.Address.Contains(searchString) || t.Phone.Contains(searchString)).ToList();
+            return list;
+        }
+
+        public IEnumerable<Customer> GetAllUsers()
+        {
+            IList<Customer> customerModel = new List<Customer>();
+            var query = context.Customers.ToList();
+            //var query = from Customer in context.Customers select Customer;
+            var customerData = query.ToList();
+            foreach (var item in customerData)
+            {
+                customerModel.Add(new Customer()
+                {
+                    Id = item.Id,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    Address = item.Address,
+                    State = item.State,
+                    Email = item.Email,
+                    Phone = item.Phone,
+                    IsActive = item.IsActive,
+                    IsDeleted = item.IsDeleted,
+                    CreatedOn = item.CreatedOn,
+                    UpdatedOn = item.UpdatedOn
+
+                });
+
+            }
+            return customerModel;
         }
 
         #region User Authentication
@@ -101,6 +135,29 @@ namespace BAL.Services
         {
             var userData = context.Customers.Where(a => a.Email == userEntity.Email && a.Password == userEntity.Password).FirstOrDefault();
             return userData;
+        }
+
+        public Customer EmailExists(Customer userEntity)
+        {
+            var userData = context.Customers.Where(a => a.Email == userEntity.Email).FirstOrDefault();
+            return userData;
+        }
+        public bool UpdateUserPassword(Customer userEntity)
+        {
+            var userData = context.Customers.SingleOrDefault(a => a.Email == userEntity.Email);
+            userData.Password = userEntity.Password;
+            context.SaveChanges();
+
+            // Check user password updated or not
+            Customer userPasswordUpdatedOrNot = context.Customers.SingleOrDefault(s => s.Email == userEntity.Email && s.Password == userEntity.Password);
+            if (userPasswordUpdatedOrNot != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion

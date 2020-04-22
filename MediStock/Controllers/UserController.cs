@@ -1,9 +1,11 @@
 ﻿using BAL.Services;
 using DAL.Domains;
 using MediStockWeb.Models;
+using MediStockWeb.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -92,139 +94,135 @@ namespace MediStockWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteUser(Customer model)
+        public ActionResult DeleteUser(Customer customerEntity)
         {
             if (TempData["Failed"] != null)
             {
                 ViewBag.Failed = "Delete User Failed";
             }
-            _userService.DeleteUser(model.Id);
+            _userService.DeleteUser(customerEntity);
             return RedirectToAction("Index", "User");
         }
 
         #endregion
 
-        //#region User Authentication
+        #region User Authentication
 
-        //[HttpPost]
-        //public ActionResult SignIn(CustomerModel model)
-        //{
-        //    Customer obj = new Customer();
+        [HttpPost]
+        public ActionResult SignIn(CustomerModel model)
+        {
+            Customer obj = new Customer();
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        obj.Email = model.Email;
-        //        obj.Password = model.Password;
-        //        var userData = _userService.SignIn(obj);
-        //        obj = userData;
-        //    }
+            if (ModelState.IsValid)
+            {
+                obj.Email = model.Email;
+                obj.Password = model.Password;
+                var userData = _userService.SignIn(obj);
+                obj = userData;
+            }
 
-        //    if (obj == null)
-        //    {
-        //        TempData["ErrorMessage"] = "Sign In failed ! Password or Email is incorrect";
-        //        return RedirectToAction("SignIn", "Home", new { area = "" });
-        //    }
-        //    else
-        //    {
-        //        if (obj.IsActive == true && obj.IsDeleted == false)
-        //        {
-        //            Session["Id"] = obj.Id.ToString();
-        //            Session["UserName"] = obj.FirstName.ToString();
-        //            return RedirectToAction("Index", "Admin", new { area = "Admin" });
-        //        }
-        //        else if (obj.isActive == true && obj.isDeleted == false)
-        //        {
-        //            Session["UserID"] = obj.UserID.ToString();
-        //            Session["UserName"] = obj.fullName.ToString();
-        //            return RedirectToAction("Index", "RegUser", new { area = "" });
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("SignIn", "Home", new { area = "" });
-        //        }
-        //    }
-        //}
+            if (obj == null)
+            {
+                TempData["ErrorMessage"] = "Sign In failed ! Password or Email is incorrect";
+                return RedirectToAction("SignIn", "Authentication", new { area = "" });
+            }
+            else
+            {
+                if (obj.IsActive == true && obj.IsDeleted == false)
+                {
+                    return RedirectToAction("Index", "Admin", new { area = "Admin" });
+                }
+                else if (obj.IsActive == true && obj.IsDeleted == false)
+                {
+                    return RedirectToAction("Index", "Home", new { area = "" });
+                }
+                else
+                {
+                    return RedirectToAction("SignIn", "Authentication", new { area = "" });
+                }
+            }
+        }
 
-        //[HttpPost]
-        //public ActionResult RecoverPassword(CustomeModel model)
-        //{
-        //    Customer obj = new Customer();
+        [HttpPost]
+        public ActionResult RecoverPassword(CustomerModel model)
+        {
+            Customer obj = new Customer();
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        obj.Email = model.Email;
-        //        var userData = _userService.EmailExists(obj);
-        //        obj = userData;
-        //    }
+            if (ModelState.IsValid)
+            {
+                obj.Email = model.Email;
+                var userData = _userService.EmailExists(obj);
+                obj = userData;
+            }
 
-        //    if (obj == null)
-        //    {
-        //        TempData["NoSuchEmailExists"] = "No Such Email Exists";
-        //        return RedirectToAction("RecoverPassword", "Home", new { area = "" });
-        //    }
-        //    else
-        //    {
-        //        // Token Generation code
-        //        int _min = 1000;
-        //        int _max = 9999;
-        //        Random _rdm = new Random();
-        //        var token = _rdm.Next(_min, _max);
-        //        TempData["OTP"] = token;
+            if (obj == null)
+            {
+                TempData["NoSuchEmailExists"] = "No Such Email Exists";
+                return RedirectToAction("RecoverPassword", "Home", new { area = "" });
+            }
+            else
+            {
+                // Token Generation code
+                int _min = 1000;
+                int _max = 9999;
+                Random _rdm = new Random();
+                var token = _rdm.Next(_min, _max);
+                TempData["OTP"] = token;
 
-        //        string email, From, Subject, Body, To, UserID, Password, SMTPPort, Host;
-        //        From = ConfigurationManager.AppSettings.Get("FromEmail");
-        //        email = obj.email.ToString();
-        //        Subject = ConfigurationManager.AppSettings.Get("RecoveryPasswordEmailSubject");
-        //        Body = ConfigurationManager.AppSettings.Get("RecoveryPasswordEmailBody") + token;
-        //        To = obj.email.ToString();
-        //        UserID = ConfigurationManager.AppSettings.Get("FromUserId");
-        //        Password = ConfigurationManager.AppSettings.Get("FromPassword");
-        //        SMTPPort = ConfigurationManager.AppSettings.Get("FromSMTPPort");
-        //        Host = ConfigurationManager.AppSettings.Get("FromHost");
+                string email, From, Subject, Body, To, Id, Password, SMTPPort, Host;
+                From = ConfigurationManager.AppSettings.Get("FromEmail");
+                email = obj.Email.ToString();
+                Subject = ConfigurationManager.AppSettings.Get("RecoveryPasswordEmailSubject");
+                Body = ConfigurationManager.AppSettings.Get("RecoveryPasswordEmailBody") + token;
+                To = obj.Email.ToString();
+                Id = ConfigurationManager.AppSettings.Get("FromUserId");
+                Password = ConfigurationManager.AppSettings.Get("FromPassword");
+                SMTPPort = ConfigurationManager.AppSettings.Get("FromSMTPPort");
+                Host = ConfigurationManager.AppSettings.Get("FromHost");
 
-        //        // For carrying further the email to update password in database.
-        //        TempData["userEmail"] = email;
+                // For carrying further the email to update password in database.
+                TempData["userEmail"] = email;
 
-        //        EmailManager emailObj = new EmailManager();
+                EmailManager emailObj = new EmailManager();
 
-        //        // call to function which sends email -> emailObj.AppSettings(out UserID, out Password, out SMTPPort, out Host);
-        //        emailObj.SendEmail(From, Subject, Body, To, UserID, Password, SMTPPort, Host);
-        //    }
+                // call to function which sends email -> emailObj.AppSettings(out UserID, out Password, out SMTPPort, out Host);
+                emailObj.SendEmail(From, Subject, Body, To, Id, Password, SMTPPort, Host);
+            }
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        //[HttpPost]
-        //public ActionResult UpdatePassword(UserViewModel model)
-        //{
-        //    string userEmail = TempData["userEmail"].ToString();
+        [HttpPost]
+        public ActionResult UpdatePassword(CustomerModel model)
+        {
+            string userEmail = TempData["userEmail"].ToString();
 
-        //    // Update password code goes here
-        //    bool result = false;
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Model Prepration
-        //        User objUserModel = new User
-        //        {
-        //            email = userEmail,
-        //            password = model.password,
-        //            updatedOn = DateTime.Now
-        //        };
+            // Update password code goes here
+            bool result = false;
+            if (ModelState.IsValid)
+            {
+                // Model Prepration
+                Customer objUserModel = new Customer
+                {
+                    Email = userEmail,
+                    Password = model.Password,
+                    UpdatedOn = DateTime.Now
+                };
 
-        //        bool userData = _userService.UpdateUserPassword(objUserModel);
-        //        result = userData;
-        //    }
+                bool userData = _userService.UpdateUserPassword(objUserModel);
+                result = userData;
+            }
 
-        //    if (result == false)
-        //        return RedirectToAction("UpdatePassword", "Home", new { area = "" });
-        //    else
-        //    {
-        //        TempData["PasswordUpdated"] = "Password updated successfully... Please Login";
-        //        return RedirectToAction("SignIn", "Home", new { area = "" });
-        //    }
-        //}
+            if (result == false)
+                return RedirectToAction("UpdatePassword", "Home", new { area = "" });
+            else
+            {
+                TempData["PasswordUpdated"] = "Password updated successfully... Please Login";
+                return RedirectToAction("SignIn", "Home", new { area = "" });
+            }
+        }
 
-        //#endregion
+        #endregion
 
 
         #endregion

@@ -1,4 +1,4 @@
-﻿
+﻿@model MediStockWeb.Models.CustomerModel
 @{
     ViewData["Title"] = "SignUp";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,6 +7,7 @@
 <section class="module" style="background-image:url(../Content/Themes/Store/assets/images/AuthBg.png)">
     <div class="container">
         <div class="row">
+             <h4 class="font-alt" style="text-shadow: 1px 1px 8px white; color:red;">@TempData["Message"]</h4>
             <div class="col-sm-5">
                 <h4 class="font-alt" style="text-shadow: 1px 1px 8px white; color: black;">Register</h4>
                 @using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))

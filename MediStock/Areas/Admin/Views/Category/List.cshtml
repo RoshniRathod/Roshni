@@ -1,112 +1,127 @@
-﻿@model CategoryModel
+﻿@model IPagedList<MediStockWeb.Areas.Admin.Models.CategoryModel>
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@*@using X.PagedList.Mvc.Core.Common;
+    @using X.PagedList.Mvc.Core.Fluent;*@
+
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "CategoryList";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@{
-    if (TempData["CategoryActiveMenuItem"].ToString() == "category-sidebar-id")
-    {
-        <script>
-            $('.nav-item').removeClass("active")
-            $('#@TempData["CategoryActiveMenuItem"].ToString()').parent().addClass("active");
-        </script>
-    }
-}
+
+<link href="E:\Sem-4\Final Project\MediStock\Areas\Admin\Theme\Category\css\bootstrap.min.css" rel="stylesheet" />
+
 <div class="page-inner">
     <div class="page-header">
         <h4 class="page-title">Categories</h4>
-        <button class="btn btn-primary"
-                type="button"
-                style="position: absolute;
-                       right: 34px;
-                       box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;"
-                onclick="window.location.href='@Url.Action("Create", "Category")'">
-            Add New
-        </button>
+
+        <div class="ml-md-auto py-2 py-md-0">
+            <a href="@Url.Action("Create", "Category")" class="btn btn-secondary btn-round">Add New</a>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-primary"
-                                    type="button"
-                                    style="box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;">
-                                Search
-                            </button>
+                @using (Html.BeginForm("SearchCategory", "Category", FormMethod.Post, new { @id = "searchFormID" }))
+                {
+                    <div class="row">
+                        <div class="col-md-4 float-right no-margin no-padding">
+                            @Html.TextBox("searchString", null, new { @id = "searchID", @class = "form-control shadow" })
                         </div>
-                        <input type="text"
-                               class="form-control col-md-6"
-                               placeholder=""
-                               aria-label=""
-                               aria-describedby="basic-addon1"
-                               style="box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;">
+                        <div class="col-md-4 float-left no-margin no-padding">
+                            <input type="submit" value="Search" onclick="validateSearch()" style="margin-left:5px;" class="btn btn-secondary btn-round">
+                        </div>
+                        <div class="col-4">
+                            <a href="@Url.Action("List","Category",new { area="Admin"})" class="btn btn-secondary btn-round" style="margin-top:5px;">Show All</a>
+                        </div>
                     </div>
-                </div>
+                }
+
                 <div class="card-body">
 
                     <table class="table mt-3">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>
-                                    <button class="btn btn-secondary btn-sm">Edit</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
+                                @*<td>@Html.DisplayNameFor(model => model.First().Name)</td>*@
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td><a href="@Url.Action("Edit", "Category", new { id = item.Id })" class="btn btn-warning shadow btn-sm active" role="button" aria-pressed="true">Edit</a></td>
+                                <td><a href="@Url.Action("Delete", "Category", new { id = item.Id })" class="btn btn-danger shadow btn-sm active" role="button" aria-pressed="true" onclick="return confirmDelete()">Delete</a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>
-                                    <button class="btn btn-secondary btn-sm">Edit</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Larry the Bird</td>
-                                <td>
-                                    <button class="btn btn-secondary btn-sm">Edit</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
+                        }
+
                     </table>
-                    <ul class="pagination pg-success">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">«</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">»</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
+
+                    <div class="pagination pg-primary">
+                        <div class="page-item">
+                            <div class="page-link">
+                                @Html.PagedListPager((IPagedList)Model, page => Url.Action("List", "Category", new { page = page }))
+                            </div>
+                        </div>
+                    </div>
+                   
+
+                    @*<ul class="pagination pg-success">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+
+
+
+                        </ul>*@
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    //function login(showhide) {
+    //    if (showhide == "show") {
+    //        document.getElementById('popupbox').style.visibility = "visible";
+    //    } else if (showhide == "hide") {
+    //        document.getElementById('popupbox').style.visibility = "hidden";
+    //    }
+    //}
+
+    function confirmDelete() {
+        return confirm("Are yo shure you want to delete");
+    }
+
+    function validateSearch() {
+
+        var searchString = document.forms["searchFormID"]["searchID"].value;
+        if (searchString == "") {
+            alert("Please type something in search box");
+            return false;
+        }
+        if (!(searchString.length >= 3 && searchString.length <= 250)) {
+            alert("Search string should be not more than 250 characters");
+            return false;
+        }
+
+    }
+</script>
