@@ -52,7 +52,7 @@ namespace MediStockWeb.Areas.Admin.Controllers
                 }
 
             var pageNumber = page ?? 1;
-            var pageSize = 3;//Show 10 rows every time
+            var pageSize = 6;//Show 10 rows every time
             return View(userList.ToPagedList(pageNumber, pageSize));
 
 
@@ -61,7 +61,8 @@ namespace MediStockWeb.Areas.Admin.Controllers
         public IActionResult Create()
         {
             var model = new UserModel();
-            return View(model);
+            return View(model
+                );
         }
 
         [HttpPost]
@@ -180,7 +181,7 @@ namespace MediStockWeb.Areas.Admin.Controllers
         }
 
 
-        public ActionResult SearchUser(string searchString)
+        public ActionResult SearchUser(string searchString , int? page)
         {
 
             // Get particular user data
@@ -204,13 +205,17 @@ namespace MediStockWeb.Areas.Admin.Controllers
                 userNameList.Add(lst);
             }
 
+            var pageNumber = page ?? 1;
+            var pageSize = 6;//Show 10 rows every time
+
+
             if (userNameList == null)
             {
-                return View("List", userNameList);
+                return View(userNameList.ToPagedList(pageNumber, pageSize));
             }
             else
             {
-                return View("List", userNameList);
+                return View(userNameList.ToPagedList(pageNumber, pageSize));
             }
         }
 

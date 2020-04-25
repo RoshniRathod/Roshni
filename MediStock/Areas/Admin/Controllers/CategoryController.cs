@@ -82,28 +82,39 @@ namespace MediStockWeb.Areas.Admin.Controllers
         {
             var model = new CategoryModel();
             return View(model);
-            //return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CategoryModel model)
+        public IActionResult Create(CategoryModel model, bool continueEditing)
         {
             // Adding new user
-            //Category category = new Category();
+            Category obj = new Category();
 
-            if (ModelState.IsValid)
+            // Model Prepration
+            Category objCatModel = new Category
             {
-                Category objCategory = new Category
-                {
-                    Name = model.Name,
 
+                Name = model.Name,
 
-                };
+                
+        };
+            var userData = _categoryService.InsertCategory(objCatModel);
+            obj = userData;
 
-                _categoryService.InsertCategory(objCategory);
+            if (obj == null)
+            {
+                return RedirectToAction("InsertCategory", "Category", new { area = "Admin" });
+            }
+            else if (!continueEditing)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Edit", new { id = objCatModel.Id });
             }
 
-            return RedirectToAction("List");
+            //return RedirectToAction("List");
 
         }
 
@@ -189,11 +200,11 @@ namespace MediStockWeb.Areas.Admin.Controllers
 
             if (categoryNameList == null)
             {
-                return View("List", categoryNameList);
+                return View("Search", categoryNameList);
             }
             else
             {
-                return View("List", categoryNameList);
+                return View("Search", categoryNameList);
             }
         }
 

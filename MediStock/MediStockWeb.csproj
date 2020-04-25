@@ -29,7 +29,16 @@
     <None Include="Areas\Admin\Views\Category\Create.cshtml" />
     <None Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Category\List.cshtml" />
+    <None Include="Areas\Admin\Views\Category\Search.cshtml" />
     <None Include="Areas\Admin\Views\Category\_CreateOrUpdate.cshtml" />
+    <None Include="Areas\Admin\Views\Medicine\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Medicine\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Medicine\List.cshtml" />
+    <None Include="Areas\Admin\Views\Medicine\_CreateOrUpdate.cshtml" />
+    <None Include="Views\Home\AboutUs.cshtml" />
+    <None Include="Views\Home\ContactUs.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="wwwroot\Content\favicon\site.webmanifest" />
     <None Include="wwwroot\Content\Themes\Admin\assets\css\atlantis.css.map" />
     <None Include="wwwroot\Content\Themes\Admin\assets\fonts\flaticon\Flaticon.svg" />
@@ -319,12 +328,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="SweetAlert" Version="1.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="8.0.7" />
   </ItemGroup>

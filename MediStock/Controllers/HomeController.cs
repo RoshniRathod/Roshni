@@ -1,5 +1,7 @@
-﻿using DAL.Data;
+﻿using BAL.Services;
+using DAL.Data;
 using DAL.Domains;
+using MediStockWeb.Areas.Admin.Models;
 using MediStockWeb.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,27 +10,30 @@ namespace MediStockWeb.Controllers
 {
     public class HomeController : BaseController
     {
-        private MediStockContext context;
+        #region Fields
+        private readonly ICategoryService _categoryService;
+        private readonly MediStockContext _context;
+        //const int pageSize = 3;
 
-        public HomeController(MediStockContext context)
+        #endregion
+
+        #region Ctor
+        public HomeController(ICategoryService categoryService, MediStockContext context)
         {
-            this.context = context;
+            _categoryService = categoryService;
+            _context = context;
         }
-
+        #endregion
+        [HttpGet]
         public IActionResult Index()
         {
-            //Log log1 = new Log() {
-
-            //    CreatedOn = DateTime.UtcNow,
-            //    LogLevel = 2,
-            //    Message = "1st Data inserted successfully"
-            //};
-            //context.Remove(log1);
-            //context.SaveChanges();
-
-           
-
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(Category category)
+        {
+            return ViewComponent("CategoryMenu");
         }
 
         public IActionResult AboutUs()

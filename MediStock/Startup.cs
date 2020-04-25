@@ -48,6 +48,9 @@ namespace MediStockWeb
             // TODO: Register services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IMedicineService, MedicineService>();
+
+            
 
             // Configure context class
             services.AddDbContext<MediStockContext>(options =>

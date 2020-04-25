@@ -18,7 +18,20 @@ namespace DAL.Domains
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public Stock Stock { get; set; }
-        public ICollection<CategoryMedicine> CategoryMedicine { get; set; }
-        public ICollection<Picture> Pictures { get; set; }
+
+        public ICollection<CategoryMedicine> _categoryMedicine;
+
+        public virtual ICollection<CategoryMedicine> CategoryMedicine
+        {
+            get => _categoryMedicine ?? (_categoryMedicine = new List<CategoryMedicine>());
+            set => _categoryMedicine = value;
+        }
+        public ICollection<Picture> _pictures;
+
+        public virtual ICollection<Picture> Pictures
+        {
+            get => _pictures ?? (_pictures = new List<Picture>());
+            set => _pictures = value;
+        }
     }
 }

@@ -1,8 +1,28 @@
-﻿@model MedicineModel
+﻿@model  MediStockWeb.Areas.Admin.Models.MedicineModel
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<form asp-controller="Medicine" asp-action="Edit" method="post" id="Form">
+ <h1 class="pull-left">
+            Edit- @Html.Raw(Model.Name)
+        </h1>
+    <div>
+        @await Html.PartialAsync("_CreateOrUpdate")
+    </div>
+    <br />
+    <div class="content-header clearfix">
 
-<h2>Edit</h2>
-
+       
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn btn-success">
+                <i class="fa fa-floppy-o"></i>
+                Save
+            </button>
+            <button type="submit" name="save-continue" class="btn btn-success">
+                <i class="fa fa-floppy-o"></i>
+                Save Continue
+            </button>
+        </div>
+    </div>
+</form>

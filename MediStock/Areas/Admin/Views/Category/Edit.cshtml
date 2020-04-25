@@ -1,27 +1,51 @@
-﻿@model CategoryModel
+﻿@model MediStockWeb.Areas.Admin.Models.CategoryModel
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<h2>Edit</h2>
+@*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
 
-<form asp-controller="Category" asp-action="Edit" method="post" id="Form">
-
-    <div>
-        @await Html.PartialAsync("_CreateOrUpdate")
-    </div>
-    <br />
+<form asp-controller="Category" asp-action="Edit" method="post" id="product-form">
     <div class="content-header clearfix">
+        <h1 class="pull-left">
+            Edit- @Html.Raw(Model.Name)
+        </h1>
 
-        <div class="ml-md-auto py-2 py-md-0">
-            <a href="@Url.Action("List", "Category")" class="btn btn-secondary btn-round">BackToList</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="submit" name="save" class="btn btn-secondary btn-round">
+        @await Html.PartialAsync("_CreateOrUpdate.cshtml", Model);
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn btn-success" id="btn">
+                <i class="fa fa-floppy-o"></i>
                 Save
             </button>
 
+            <button type="submit" name="save-continue" class="btn btn-success" id="btnsc">
+                <i class="fa fa-floppy-o"></i>
+                Save Continue
+            </button>
         </div>
-
     </div>
 
 </form>
+<script>
+    var btn = document.getElementById("btn");
+    btn.addEventListener("click", function () {
+        var Name = document.getElementById("Name").value;
+        if (Name == "") {
+            swal("Error", "Please Enter Name", "error");
+        }
+        else {
+            swal("Success", Name, "success");
+        }
+    })
+
+    var btn1 = document.getElementById("btnsc");
+    btn1.addEventListener("click", function () {
+        var Name = document.getElementById("Name").value;
+        if (Name == "") {
+            swal("Error", "Please Enter Name", "error");
+        }
+        else {
+            swal("Success", Name, "success");
+        }
+    })
+</script>
