@@ -33,7 +33,6 @@ namespace MediStockWeb.Controllers
         [HttpPost]
         public ActionResult AddUser(CustomerModel model)
         {
-            Customer obj = new Customer();
             if (ModelState.IsValid)
             {
                 Customer objCustomerModel = new Customer
@@ -41,7 +40,6 @@ namespace MediStockWeb.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
-                    Password = model.Password,
                     Phone = model.Phone,
                     City = model.City,
                     State = model.State,
@@ -51,6 +49,11 @@ namespace MediStockWeb.Controllers
                     IsDeleted = false,
                     CreatedOn = DateTime.Now,
                     UpdatedOn = DateTime.Now
+                };
+
+                objCustomerModel.Password = new Password()
+                {
+                    PasswordString = model.PasswordStr
                 };
 
                 var userData = _userService.AddUser(objCustomerModel);
