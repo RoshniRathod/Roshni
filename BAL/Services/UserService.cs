@@ -29,7 +29,7 @@ namespace BAL.Services
             else
             {
                 context.Customers.Add(customerEntity);
-                context.Passwords.Add(customerEntity.Password);
+               // context.Passwords.Add(customerEntity.Password);
                 context.SaveChanges();
                 Customer result = context.Customers.Where(s => s.Email == customerEntity.Email).FirstOrDefault();
                 return result;

@@ -17,6 +17,7 @@ namespace MediStockWeb.Models
         public string State { get; set; }
         public string Address { get; set; }
         public int Zipcode { get; set; }
+        [DataType(DataType.Password)]
         public Password Password { get; set; }
         public Password confirmPassword { get; set; }
     }

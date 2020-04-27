@@ -18,6 +18,9 @@
                        right: 34px;
                        box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;"
                 onclick="window.location.href='@Url.Action("Create", "Category")'">
+                                <span class="btn-label">
+												<i class="fa fa-plus"></i>
+											</span>
             Add New
         </button>
 
@@ -35,10 +38,10 @@
                                         @Html.TextBox("searchString", null, new { @id = "searchID", @class = "form-control shadow" })
                                     </div>
                                     <div class="col-md-4 float-left no-margin no-padding">
-                                        <input type="submit" value="Search" onclick="validateSearch()" style="margin-left:5px;" class="btn btn-success shadow">
+                                        <input type="submit" value="Search" onclick="validateSearch()" style="margin-left:5px;" class="btn btn-success shadow la flaticon-search-2">
                                     </div>
                                     <div class="col-4">
-                                        <a href="@Url.Action("List","Category",new { area="Admin"})" class="btn btn-primary shadow float-right" style="margin-top:5px;">Show All</a>
+                                        <a href="@Url.Action("List","Category",new { area="Admin"})" class="btn btn-primary shadow float-right la flaticon-search-2" style="margin-top:5px;"> Show All </a>
                                     </div>
                                 </div>
                             }
@@ -60,8 +63,8 @@
                             <tr>
                                 @*<td>@Html.DisplayNameFor(model => model.First().Name)</td>*@
                                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                <td><a href="@Url.Action("Edit", "Category", new { id = item.Id })" class="btn btn-warning shadow btn-sm active" role="button" aria-pressed="true">Edit</a></td>
-                                <td><a href="@Url.Action("Delete", "Category", new { id = item.Id })" class="btn btn-danger shadow btn-sm active" role="button" aria-pressed="true" onclick="return confirmDelete()">Delete</a></td>
+                                <td><a href="@Url.Action("Edit", "Category", new { id = item.Id })" class="btn btn-warning shadow btn-sm active la flaticon-pen" role="button" aria-pressed="true"> Edit </a></td>
+                                <td><a href="@Url.Action("Delete", "Category", new { id = item.Id })" class="btn btn-danger shadow btn-sm active la flaticon-interface-5" role="button" aria-pressed="true" onclick="return DeletePaymentCard()"> Delete </a> </td>
                             </tr>
                         }
 
@@ -109,22 +112,6 @@
 </div>
 
 <script>
-
-    //function login(showhide) {
-    //    if (showhide == "show") {
-    //        document.getElementById('popupbox').style.visibility = "visible";
-    //    } else if (showhide == "hide") {
-    //        document.getElementById('popupbox').style.visibility = "hidden";
-    //    }
-    //}
-
-    function confirmDelete() {
-        //swal("Are yo shure you want to delete");
-        swal("Error", "Please Enter Name", "error");
-        swal("Category", "you have successfully deleted the category!", "OK");
-
-    }
-
     function validateSearch() {
 
         var searchString = document.forms["searchFormID"]["searchID"].value;
@@ -138,4 +125,43 @@
         }
 
     }
+        function DeletePaymentCard() {
+        return confirm("Are you shure you want to Delete the selected item ?");
+    }
+
 </script>
+@*<script type="text/javascript">
+    function DeletePaymentCard(){
+    swal({
+						title: 'Are you sure?',
+						text: "You won't be able to revert this!",
+						type: 'warning',
+						buttons:{
+							confirm: {
+								text : 'Yes, delete it!',
+								className : 'btn btn-success'
+							},
+							cancel: {
+								visible: true,
+								className: 'btn btn-danger'
+							}
+						}
+					}).then((Delete) => {
+						if (Delete) {
+							swal({
+								title: 'Deleted!',
+								text: 'Your file has been deleted.',
+								type: 'success',
+								buttons : {
+									confirm: {
+										className : 'btn btn-success'
+									}
+								}
+							});
+						} else {
+							swal.close();
+						}
+					});
+        }
+
+</script>*@

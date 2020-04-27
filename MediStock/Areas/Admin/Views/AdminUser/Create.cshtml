@@ -7,18 +7,71 @@
 
 <form asp-controller="AdminUser" asp-action="Create" method="post" id="product-form">
     <div class="content-header clearfix">
+        @await Html.PartialAsync("_CreateOrUpdate.cshtml", Model);
 
         <div class="pull-right">
-            <button type="submit" name="save" class="btn btn-success">
+            <button type="submit" name="save" class="btn btn-success" id="btn">
                 <i class="fa fa-floppy-o"></i>
                 Save
             </button>
 
-            <button type="submit" name="save-continue" class="btn btn-success">
+            <button type="submit" name="save-continue" class="btn btn-success" id="btnsc">
                 <i class="fa fa-floppy-o"></i>
                 Save Continue
             </button>
         </div>
     </div>
-    @await Html.PartialAsync("_CreateOrUpdate.cshtml", Model);
 </form>
+<script>
+    var btn = document.getElementById("btn");
+    btn.addEventListener("click", function (){
+        var FirstName = document.getElementById("FirstName").value;
+        var LastName = document.getElementById("LastName").value;
+        var Email = document.getElementById("Email").value;
+        var Phone = document.getElementById("Phone").value;
+        var Address = document.getElementById("Address").value;
+        var Zipcode = document.getElementById("Zipcode").value;
+        var IsActive = document.getElementById("IsActive").value;
+        if (FirstName == "") {
+            swal({
+                    title: "Fields Empty !!",
+                    text: "Please check the missing Field!!",
+                    icon: "warning",
+                    button: "ok",
+            });
+        }
+        else {
+             swal({
+                    title: "Successfully submitted",
+                    icon: "success",
+                    button: "yess!!",
+            });
+        }
+    })
+
+   var btn1 = document.getElementById("btnsc");
+    btn.addEventListener("click", function (){
+        var FirstName = document.getElementById("FirstName").value;
+        var LastName = document.getElementById("LastName").value;
+        var Email = document.getElementById("Email").value;
+        var Phone = document.getElementById("Phone").value;
+        var Address = document.getElementById("Address").value;
+        var Zipcode = document.getElementById("Zipcode").value;
+        var IsActive = document.getElementById("IsActive").value;
+        if (FirstName == "") {
+            swal({
+                    title: "Fields Empty !!",
+                    text: "Please check the missing Field!!",
+                    icon: "warning",
+                    button: "ok",
+            });
+        }
+        else {
+             swal({
+                    title: "Successfully submitted",
+                    icon: "success",
+                    button: "yess!!",
+            });
+        }
+    })
+</script>

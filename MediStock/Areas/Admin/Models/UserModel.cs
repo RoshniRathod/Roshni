@@ -1,5 +1,6 @@
 ﻿using DAL.Domains;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MediStockWeb.Areas.Admin.Models
 {
@@ -14,6 +15,7 @@ namespace MediStockWeb.Areas.Admin.Models
         public string State { get; set; }
         public string Address { get; set; }
         public int Zipcode { get; set; }
+        [DataType(DataType.Password)]
         public Password Password { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }

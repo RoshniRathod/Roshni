@@ -16,6 +16,10 @@
                        right: 34px;
                        box-shadow: 4px 4px 10px 0 rgba(0,0,0,.1),4px 4px 15px -5px rgba(21,114,232,.4)!important;"
                 onclick="window.location.href='@Url.Action("Create", "AdminUser")'">
+                <span class="btn-label">
+												<i class="fa fa-plus"></i>
+	
+    </span>
             Add New
         </button>
     </div>
@@ -31,11 +35,11 @@
                     <div class="col-md-4 float-right no-margin no-padding">
                         @Html.TextBox("searchString", null, new { @id = "searchID", @class = "form-control shadow" })
                     </div>
-                    <div class="col-md-4 float-left no-margin no-padding">
-                        <input type="submit" value="Search" onclick="validateSearch()" style="margin-left:5px;" class="btn btn-success shadow">
+                    <div class="col-md-4 float-left no-margin no-padding ">
+                        <input type="submit" value="Search" onclick="validateSearch()" style="margin-left:5px;" class="btn btn-primary shadow float-right la flaticon-search-2">
                     </div>
                     <div class="col-4">
-                        <a href="@Url.Action("List","AdminUser",new { area="Admin"})" class="btn btn-primary shadow float-right" style="margin-top:5px;">Show All</a>
+                        <a href="@Url.Action("List","AdminUser",new { area="Admin"})" class="btn btn-primary shadow float-right la flaticon-search-2" style="margin-top:5px;"> Show All </a>
                     </div>
                 </div>
             }
@@ -96,11 +100,8 @@
                                 </td>
                                 @*<td>@user.createdOn</td>
                                     <td>@user.updatedOn</td>*@
-                                <td><a href="@Url.Action("Edit", "AdminUser", new { area = "Admin", id = user.UserID })" class="btn btn-warning shadow btn-sm active" role="button" aria-pressed="true">Edit</a></td>
-                                <td><a href="@Url.Action("Delete", "AdminUser", new { area = "Admin", id = user.UserID })" class="btn btn-danger shadow btn-sm active" role="button" aria-pressed="true" onclick="return confirmDelete()">Delete</a></td>
-                                @*<td><span data-userid="@user.UserID" data-href="@Url.Action("DeleteUser", "AdminUser", new { area = "Admin", id = user.UserID })"
-                                    class="btn btn-danger shadow btn-sm active btnDeleteUser" role="button" aria-pressed="true">Delete</span></td>*@
-
+                                <td><a href="@Url.Action("Edit", "AdminUser", new { area = "Admin", id = user.UserID })" class="btn btn-warning shadow btn-sm active la flaticon-pen" role="button" aria-pressed="true">Edit</a></td>
+                                <td><a href="@Url.Action("Delete", "AdminUser", new { area = "Admin", id = user.UserID })" class="btn btn-danger shadow btn-sm active la flaticon-interface-5" role="button" aria-pressed="true" onclick="return confirmDelete()">Delete</a></td>
                             </tr>
                         }
                     }

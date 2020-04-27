@@ -13,13 +13,13 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Users</a>
+								<a href="@Url.Action("List","AdminUser",new { area="Admin"})">Users</a>
 							</li>
 							<li class="separator">
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Add New User</a>
+								<a href="@Url.Action("List","AdminUser",new { area="Admin"})">Add New User</a>
 							</li>
 						</ul>
 					</div>
@@ -70,7 +70,7 @@
 											<label for="birth" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">State <span class="required-label">*</span></label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="select2-input">
-													<select id="state" name="state" class="form-control select2-hidden-accessible" value="@Model.State" required="" data-select2-id="state" tabindex="-1" aria-hidden="true">
+													<select id="state" name="State" class="form-control select2-hidden-accessible" value="@Model.State" required="" data-select2-id="state" tabindex="-1" aria-hidden="true">
 														<option value="" data-select2-id="2">&nbsp;</option>
 														<optgroup label="Alaskan/Hawaiian Time Zone">
 															<option value="AK">Alaska</option>
