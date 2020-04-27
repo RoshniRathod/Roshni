@@ -7,7 +7,7 @@
 <section class="module" style="background-image:url(../Content/Themes/Store/assets/images/AuthBg.png)">
     <div class="container">
         <div class="row">
-             <h4 class="font-alt" style="text-shadow: 1px 1px 8px white; color:red;">@TempData["Message"]</h4>
+            <h4 class="font-alt" style="text-shadow: 1px 1px 8px white; color:red;">@TempData["Message"]</h4>
             <div class="col-sm-5">
                 <h4 class="font-alt" style="text-shadow: 1px 1px 8px white; color: black;">Register</h4>
                 @using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
@@ -25,7 +25,7 @@
                         <input class="form-control" id="phone" type="text" name="Phone" placeholder="Phone" style="box-shadow: 8px 8px 0px black;" />
                     </div>
                     <div class="form-group">
-                    @Html.Password("Password", "",new {@class="form-control"} )
+                        <input class="form-control" id="PasswordStr" type="password" name="PasswordStr" style="box-shadow: 8px 8px 0px black;" />
                     </div>
                     <div class="form-group">
                         <input class="form-control" id="re-password" type="password" name="re-password" placeholder="Re-enter Password" style="box-shadow: 8px 8px 0px black;" />
